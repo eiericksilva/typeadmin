@@ -12,15 +12,21 @@ import {
   InputGroup,
   Main,
 } from "./Login";
+import Alert from "../../components/Alert";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [lembrar, setLembrar] = useState(false);
+  const [isError, setIsError] = useState(false);
+
+  const navigate = useNavigate();
 
   const authenticate = async (e) => {
-    const url = "http://localhost:3000/auth";
     e.preventDefault();
+
+    const url = "http://localhost:3000/auth";
 
     const response = await fetch(url, {
       method: "POST",
@@ -34,9 +40,18 @@ const Login = () => {
     });
 
     const data = await response.json();
-    Cookies.set("token", data.token, {
-      expires: lembrar ? 30 : null,
-    });
+
+    if (response.status === 200) {
+      Cookies.set("token", data.token, {
+        expires: lembrar ? 30 : null,
+      });
+
+      navigate("/app");
+    }
+
+    if (response.status === 404) {
+      setIsError(true);
+    }
   };
   return (
     <Container>
@@ -46,6 +61,7 @@ const Login = () => {
           <p className="fs-paragraph-2">
             Insira suas informações abaixo para acessar seu painel
           </p>
+          {isError ? <Alert isError={isError} setIsError={setIsError} /> : null}
           <Form onSubmit={authenticate}>
             <InputGroup>
               <label className="fs-paragraph-1">Email</label>
@@ -53,6 +69,7 @@ const Login = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </InputGroup>
             <InputGroup>
@@ -61,6 +78,7 @@ const Login = () => {
                 type="password"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
+                required
               />
             </InputGroup>
             <CheckboxGroup>

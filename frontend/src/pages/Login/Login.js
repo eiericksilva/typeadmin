@@ -40,6 +40,7 @@ export const CheckboxGroup = styled.div`
     height: 20px;
     border: 1ox solid var(--white-100);
     margin-right: 8px;
+    cursor: pointer;
   }
 `;
 
@@ -51,6 +52,7 @@ export const Button = styled.button`
   border-radius: 4px;
   color: var(--white-500);
   font-size: var(--fs-paragraph-2);
+  cursor: pointer;
 `;
 
 export const Background = styled.div`
@@ -59,7 +61,6 @@ export const Background = styled.div`
 `;
 
 export const BackgroundImage = styled.div`
-  background: url("../../assets/login-img.png") no-repeat;
   background-size: cover;
   width: 100%;
   height: 100vh;
