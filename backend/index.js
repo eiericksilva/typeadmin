@@ -7,8 +7,8 @@ app.use(express.json());
 app.use(cors());
 
 const credentials = {
-  email: "ericksilvaredes@gmail.com",
-  senha: "123456",
+  email: "e@e.com",
+  senha: "123",
 };
 
 const key = "qwertyuiopasdfghjklç789456";
