@@ -64,8 +64,11 @@ const Login = () => {
           {isError ? <Alert isError={isError} setIsError={setIsError} /> : null}
           <Form onSubmit={authenticate}>
             <InputGroup>
-              <label className="fs-paragraph-1">Email</label>
+              <label htmlFor="email" className="fs-paragraph-1">
+                Email
+              </label>
               <Input
+                id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -73,8 +76,11 @@ const Login = () => {
               />
             </InputGroup>
             <InputGroup>
-              <label className="fs-paragraph-1">Senha</label>
+              <label htmlFor="password" className="fs-paragraph-1">
+                Senha
+              </label>
               <Input
+                id="password"
                 type="password"
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
