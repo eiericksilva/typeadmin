@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
 import { getUser } from "../repositories/users.repository.js";
 
-export const authenticate = (req, res) => {
+export const authenticate = async (req, res) => {
   const { email, senha } = req.body;
 
-  const user = getUser(email);
+  const user = await getUser(email);
 
-  if (senha === user.senha) {
+  if (senha === user?.senha) {
     if (user.role !== "admin") {
       return res.status(403).send({
         error: "User not authorized",
